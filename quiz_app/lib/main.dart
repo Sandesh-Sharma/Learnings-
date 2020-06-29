@@ -25,6 +25,20 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Widget> scoreKeeper = [];
+  List questions = [
+    'Lionel Messi is the GOAT',
+    'Lionel Messi plays for Real Madrid',
+    'Neymar Junior is from Brazil',
+    'Barcelona is the best club in the world',
+    'Lionel Messi is from Nepal',
+  ];
+  List<bool> answers = [true, false, true, true, false];
+
+  int number = 0;
+
+  void checkAnswer(number) {}
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,7 +51,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                questions[number],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -61,7 +75,16 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                //The user picked true.
+                setState(() {
+                  if (answers[number] == true) {
+                    scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+                  } else
+                    scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+                  if (number < 4) {
+                    number = number + 1;
+                  } else
+                    number = 0;
+                });
               },
             ),
           ),
@@ -79,12 +102,23 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                //The user picked false.
+                setState(() {
+                  if (answers[number] == false) {
+                    scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+                  } else
+                    scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+                  if (number < 4) {
+                    number = number + 1;
+                  } else
+                    number = 0;
+                });
               },
             ),
           ),
         ),
-        //TODO: Add a Row here as your score keeper
+        Row(
+          children: scoreKeeper,
+        ),
       ],
     );
   }
