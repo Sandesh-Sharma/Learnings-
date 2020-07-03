@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+const bottomContainerHeight = 80.0;
+const Color boxColor = Color(0xFF1D1E33);
+const bottomContainerColor = Color(0xFFEB1555);
+
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
@@ -12,32 +16,55 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
       ),
-      body: Center(
-        child: Column(children: [
-          Row(
+      body: Column(children: [
+        Expanded(
+          child: Row(
             children: <Widget>[
-              boxes(),
-              boxes(),
+              Boxes(
+                colour: boxColor,
+              ),
+              Boxes(
+                colour: boxColor,
+              ),
             ],
           ),
-          boxes(),
-          Row(
+        ),
+        Boxes(
+          colour: boxColor,
+        ),
+        Expanded(
+          child: Row(
             children: <Widget>[
-              boxes(),
-              boxes(),
+              Boxes(
+                colour: boxColor,
+              ),
+              Boxes(
+                colour: boxColor,
+              ),
             ],
           ),
-        ]),
-      ),
+        ),
+        Container(
+          color: bottomContainerColor,
+          margin: EdgeInsets.only(top: 10.0),
+          width: double.infinity,
+          height: bottomContainerHeight,
+        ),
+      ]),
     );
   }
+}
 
-  Widget boxes() {
+class Boxes extends StatelessWidget {
+  final Color colour;
+  Boxes({@required this.colour});
+  @override
+  Widget build(BuildContext context) {
     return Expanded(
       child: Container(
         margin: EdgeInsets.all(15.0),
         decoration: BoxDecoration(
-          color: Colors.red,
+          color: colour,
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
